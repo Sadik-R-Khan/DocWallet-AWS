@@ -1,0 +1,37 @@
+# Angular
+docwallet_frontend/node_modules/
+docwallet_frontend/dist/
+docwallet_frontend/.angular/
+npm-debug.log*
+
+
+# Spring Boot / Maven
+Backend/target/
+Backend/.mvn/timing.properties
+
+
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+
+
+# Spring Boot configuration / secrets
+Backend/src/main/resources/application.properties
+
+# IDE
+.vscode/
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# AWS / SSH keys
+*.pem
