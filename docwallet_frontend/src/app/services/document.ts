@@ -15,7 +15,7 @@ export interface DocumentData{
   providedIn: 'root',
 })
 export class DocumentService {
-  private baseUrl = 'http://localhost:8080/api/documents';
+  private baseUrl = '/api/documents';
 
   constructor(private http:HttpClient){}
 

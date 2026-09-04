@@ -17,7 +17,7 @@ export interface AuthResponse{
 })
 
 export class AuthService{
-  private baseUrl ='http://localhost:8080/api/auth';
+  private baseUrl = '/api/auth';
   private tokenKey ='jwt_token';
 
   constructor(private http:HttpClient, private router: Router){}
