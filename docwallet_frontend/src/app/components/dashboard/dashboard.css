@@ -12,16 +12,83 @@
   margin-bottom: 2rem;
   padding-bottom: 1rem;
   border-bottom: 2px solid #e2e8f0;
+  gap: 1.5rem;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.header-logo {
+  width: 40px;
+  height: 40px;
+}
+
+.header-center {
+  flex: 1;
+  max-width: 480px;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.search-bar:focus-within {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.search-icon {
+  color: #94a3b8;
+  flex-shrink: 0;
+  margin-right: 0.5rem;
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 0.925rem;
+  color: #1e293b;
+  width: 100%;
+  font-family: inherit;
+}
+
+.search-input::placeholder {
+  color: #94a3b8;
+}
+
+.search-clear {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  font-size: 0.875rem;
+  padding: 0 0.25rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.search-clear:hover {
+  color: #475569;
 }
 
 th.sortable {
   cursor: pointer;
-  user-select: none; /* Prevents the text from highlighting if they click really fast */
+  user-select: none;
   transition: background-color 0.2s;
 }
 
 th.sortable:hover {
-  background-color: #e2e8f0; /* A slightly darker gray on hover */
+  background-color: #e2e8f0;
 }
 
 th span {
@@ -32,6 +99,7 @@ th span {
 .dashboard-header h1 {
   margin: 0;
   color: #0f172a;
+  white-space: nowrap;
 }
 
 .logout-btn {

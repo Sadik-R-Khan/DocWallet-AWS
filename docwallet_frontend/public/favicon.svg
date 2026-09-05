@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <!-- Wallet body -->
+  <rect x="3" y="8" width="26" height="19" rx="3" fill="#1e293b"/>
+  <!-- Wallet flap -->
+  <path d="M3 11C3 9.34315 4.34315 8 6 8H26C27.6569 8 29 9.34315 29 11V14H3V11Z" fill="#334155"/>
+  <!-- Document -->
+  <rect x="11" y="16" width="8" height="9" rx="1" fill="#f8fafc"/>
+  <rect x="13" y="18.5" width="4" height="1" rx="0.5" fill="#94a3b8"/>
+  <rect x="13" y="20.5" width="4" height="1" rx="0.5" fill="#94a3b8"/>
+  <rect x="13" y="22.5" width="2.5" height="1" rx="0.5" fill="#94a3b8"/>
+  <!-- Lock -->
+  <circle cx="23" cy="12" r="2" fill="#3b82f6"/>
+  <rect x="22.25" y="11.5" width="1.5" height="1.5" rx="0.25" fill="#1e293b"/>
+  <path d="M22 11C22 10.4477 22.4477 10 23 10C23.5523 10 24 10.4477 24 11" stroke="#1e293b" stroke-width="1" stroke-linecap="round" fill="none"/>
+</svg>

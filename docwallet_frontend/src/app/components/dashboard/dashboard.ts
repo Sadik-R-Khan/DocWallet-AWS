@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { DocumentService,DocumentData } from '../../services/document';
 import { AuthService } from '../../services/auth';
@@ -6,7 +7,7 @@ import { finalize, Observable, tap, timeout } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   standalone: true,
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
@@ -15,12 +16,14 @@ export class DashboardComponent implements OnInit {
   @ViewChild('fileInput') fileInput?: ElementRef<HTMLInputElement>;
 
   documents: DocumentData[] =[];
+  allDocuments: DocumentData[] = [];
   selectedFile: File | null = null;
   isUploading: boolean = false;
   isDeleting: boolean = false;
   isDocumentsLoading: boolean = false;
   message: string ='';
   errormessage: string ='';
+  searchQuery: string = '';
 
   constructor(
     private documentService: DocumentService,
@@ -59,7 +62,8 @@ export class DashboardComponent implements OnInit {
   private refreshDocuments(): Observable<DocumentData[]> {
     return this.documentService.getUserDocuments().pipe(
       tap((data: DocumentData[]) => {
-        this.documents = data || [];
+        this.allDocuments = data || [];
+        this.applySearchFilter();
         this.refreshView();
       })
     );
@@ -132,7 +136,8 @@ export class DashboardComponent implements OnInit {
       .subscribe({
       next:(document: DocumentData) =>{
         this.isUploading = false;
-        this.documents = [document, ...this.documents.filter((doc) => doc.id !== document.id)];
+        this.allDocuments = [document, ...this.allDocuments.filter((doc) => doc.id !== document.id)];
+        this.applySearchFilter();
         this.message='File secured and uploaded successfully';
         this.selectedFile= null;
         if(this.fileInput?.nativeElement){
@@ -184,7 +189,8 @@ export class DashboardComponent implements OnInit {
       .subscribe({
         next:()=>{
           this.isDeleting = false;
-          this.documents = this.documents.filter((doc) => doc.id !== id);
+          this.allDocuments = this.allDocuments.filter((doc) => doc.id !== id);
+          this.applySearchFilter();
           this.message="Document deleted successfully.";
           this.errormessage='';
           this.refreshView();
@@ -206,6 +212,29 @@ export class DashboardComponent implements OnInit {
     return parseFloat((bytes/Math.pow(k,i)).toFixed(2))+''+size[i];
   }
 
+
+  applySearchFilter(): void {
+    if (!this.searchQuery.trim()) {
+      this.documents = [...this.allDocuments];
+    } else {
+      const query = this.searchQuery.toLowerCase().trim();
+      this.documents = this.allDocuments.filter(doc =>
+        doc.filename.toLowerCase().includes(query) ||
+        doc.contentType.toLowerCase().includes(query)
+      );
+    }
+  }
+
+  onSearchChange(): void {
+    this.applySearchFilter();
+    this.refreshView();
+  }
+
+  clearSearch(): void {
+    this.searchQuery = '';
+    this.applySearchFilter();
+    this.refreshView();
+  }
 
   logOut():void{
     this.authService.logout();
